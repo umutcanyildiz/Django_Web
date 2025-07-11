@@ -2,9 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-# Create your views here.
-def home(request): #istege karsi bir de response donduruyoruz
-    return HttpResponse('anasayfa')
 
 def kurslar(request):
     return HttpResponse('kurslar')
+
+def programlama(request):
+    return HttpResponse('programlama kurs listesi')
+
+def mobiluygulamalar(request):
+    return HttpResponse('mobiluygulamalar kurs listesi')
+
+def details(request):
+    return HttpResponse('kurs detay sayfası')

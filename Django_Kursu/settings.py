@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'courses' # eklediğimiz uygulamayı projemize tanımlıyoruz
+    'courses', # eklediğimiz uygulamayı projemize tanımlıyoruz
+    'pages' # eklediğimiz pages uygulamasını projemize tanımlıyoruz (ana projenin settings.py dosyasında)
 ]
 
 MIDDLEWARE = [
