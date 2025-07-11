@@ -1,0 +1,2 @@
+You’re seeing this error because you have DEBUG = True in your Django settings file. Change that to False, and Django will display a standard 404 page. 
+Burda geliştirme modunda olduğumuz için DEBUG=True olur, yani hatayı gösterir, ama site yayınlandıktan sonra False yapılır.
