@@ -9,7 +9,7 @@ urlpatterns = [
     path('', views.kurslar), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
     path('list',views.kurslar),
     path('details',views.details),
-    path('programlama',views.programlama),
-    path('mobil-uygulama',views.mobiluygulamalar),
-
+    path('<category>',views.getCoursesByCategory) # dinamik url, category değişkeni views fonksiyonuna parametre olarak gönderilir
+    #ve birde yukardan aşağıya doğru kontrol edilir, eğer yukarıdaki path'ler ile eşleşmezse bu dinamik url'e yönlendirilir
+    #yani sırayla kontrol edilir, ilk eşleşen bulunur ve o yönlendirilir
 ]
