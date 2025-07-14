@@ -8,8 +8,13 @@ from . import views #aynı dizindeki views modülünü içe aktarıyoruz
 urlpatterns = [
     path('', views.kurslar), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
     path('list',views.kurslar),
-    path('details',views.details),
-    path('<category>',views.getCoursesByCategory) # dinamik url, category değişkeni views fonksiyonuna parametre olarak gönderilir
+    path('<kurs_adi>',views.details),
+    path('kategori/<int:category_id>',views.getCoursesByCategoryId),
+    path('kategori/<str:category_name>',views.getCoursesByCategory), #kategori/ adı sabit olarak gelir ve int bir veri geldiğinde üstteki #path ile eşleşir, str bir veri geldiğinde ise alttaki path ile eşleşir
+    
+    
+    
+    # dinamik url, category değişkeni views fonksiyonuna parametre olarak gönderilir
     #ve birde yukardan aşağıya doğru kontrol edilir, eğer yukarıdaki path'ler ile eşleşmezse bu dinamik url'e yönlendirilir
     #yani sırayla kontrol edilir, ilk eşleşen bulunur ve o yönlendirilir
 ]
