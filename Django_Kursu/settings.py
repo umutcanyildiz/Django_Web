@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Django_Kursu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # templates dizinini ekliyoruz
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
