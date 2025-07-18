@@ -11,7 +11,13 @@ data = {
 
 
 def kurslar(request):
-    return HttpResponse('kurslar')
+    category_list = list(data.keys()) # Kategorilerin anahtarlarını listeye al
+    list_items = "" # Liste öğelerini oluştur
+    for category_name in category_list: # Her kategori için liste öğesi oluştur
+        redirect_url = reverse('courses_by_category', args=[category_name]) # reverse ile url'yi alıyoruz
+        list_items += f'<li><a href="{redirect_url}">{category_name}</a></li>' # Kategori adını ve yönlendirme URL'sini kullanarak liste öğesi oluştur
+    html = f"<h1>kurslar</h1><ul>{list_items}</ul>" # HTML içeriğini oluştur
+    return HttpResponse(html) 
 
 def details(request,kurs_adi):
     return HttpResponse(f'{kurs_adi} detay sayfası')
