@@ -9,6 +9,11 @@ data = {
     "web": "web kategorisindeki kurslar"
 }
 
+# http://127.0.0.1:8000/kurslar
+
+def index(request):
+    return render(request, 'courses/index.html')  # index.html dosyasını render ediyoruz
+# ! önemli: eğer kendi dosyasında index.html dosyası yoksa,diğer uygulamalardaki index.html dosyasını render eder
 
 def kurslar(request):
     category_list = list(data.keys()) # Kategorilerin anahtarlarını listeye al

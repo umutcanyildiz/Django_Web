@@ -6,7 +6,7 @@ from . import views #aynı dizindeki views modülünü içe aktarıyoruz
 #burdaki home kurslar views dosyasından erişilebilir hale gelir
 
 urlpatterns = [
-    path('', views.kurslar), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
+    path('', views.index), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
     path('list',views.kurslar),
     path('<kurs_adi>',views.details),
     path('kategori/<int:category_id>',views.getCoursesByCategoryId),
