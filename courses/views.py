@@ -11,18 +11,12 @@ data = {
 
 # http://127.0.0.1:8000/kurslar
 
-def index(request):
-    return render(request, 'courses/index.html')  # index.html dosyasını render ediyoruz
-# ! önemli: eğer kendi dosyasında index.html dosyası yoksa,diğer uygulamalardaki index.html dosyasını render eder
 
-def kurslar(request):
+def index(request):
     category_list = list(data.keys()) # Kategorilerin anahtarlarını listeye al
-    list_items = "" # Liste öğelerini oluştur
-    for category_name in category_list: # Her kategori için liste öğesi oluştur
-        redirect_url = reverse('courses_by_category', args=[category_name]) # reverse ile url'yi alıyoruz
-        list_items += f'<li><a href="{redirect_url}">{category_name}</a></li>' # Kategori adını ve yönlendirme URL'sini kullanarak liste öğesi oluştur
-    html = f"<h1>kurslar</h1><ul>{list_items}</ul>" # HTML içeriğini oluştur
-    return HttpResponse(html) 
+
+    return render(request, 'courses/index.html'
+                  , {'categories': category_list})
 
 def details(request,kurs_adi):
     return HttpResponse(f'{kurs_adi} detay sayfası')
@@ -30,8 +24,11 @@ def details(request,kurs_adi):
 def getCoursesByCategory(request, category_name): #dinamik url parametresi
     # category parametresi URL'den alınır ve kullanılır
     try:
-        courses = data[category_name]
-        return HttpResponse(f'{category_name} kategorisindeki kurslar listesi')
+        category_text = data[category_name]
+        return render(request, 'courses/kurslar.html', {
+            'category_name': category_name,
+            'category_text': category_text 
+            })
     except :
         return HttpResponseNotFound('Kategori bulunamadı')
     

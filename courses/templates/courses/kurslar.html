@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %} <!--bu contentin içine yazılacak olanlar layout.html dosyasındaki contentin içine yazılacak-->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ category_name }} Kategorisi</h1>
+                <p>{{ category_text }}</p>
+            </div>  
+        </div>
+    </div>
+{% endblock %}
+{% block title %}Kurslar{% endblock %}

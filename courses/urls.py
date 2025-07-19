@@ -7,7 +7,6 @@ from . import views #aynı dizindeki views modülünü içe aktarıyoruz
 
 urlpatterns = [
     path('', views.index), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
-    path('list',views.kurslar),
     path('<kurs_adi>',views.details),
     path('kategori/<int:category_id>',views.getCoursesByCategoryId),
     path('kategori/<str:category_name>',views.getCoursesByCategory,name="courses_by_category"), #kategori/ adı sabit olarak gelir ve str bir veri geldiğinde bu path ile eşleşir

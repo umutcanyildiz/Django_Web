@@ -1,8 +1,22 @@
 {% extends "layout.html" %}
 {% block content %} <!--bu contentin içine yazılacak olanlar layout.html dosyasındaki contentin içine yazılacak-->
-    <div class="container">
-        <h1>Kurslar</h1>
-        <p>Bu sayfa kurs bilgilerini içerir.</p>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-3">
+                <!--menu-->
+                {% comment %} {% include "courses/partials/_categories.html" %} {% endcomment %}
+                <div class="list-group">
+                    {% for category in categories %}
+                        <a href="{% url "courses_by_category" category %}" class="list-group-item list-group-item-action">{{ category }}</a>
+                    {% endfor %} 
+                </div>
+
+            </div>
+            <div class="col-9">
+                <!--content-->
+                
+            </div>  
+        </div>
     </div>
 {% endblock %}
 {% block title %}Kurslar{% endblock %}
