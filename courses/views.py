@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
-
+from datetime import date
 data = {
     "progralamlama": "programlama kategorisindeki kurslar",
     "yazilim": "yazılım kategorisindeki kurslar",
@@ -9,14 +9,61 @@ data = {
     "web": "web kategorisindeki kurslar"
 }
 
+db = {
+    "courses" : [
+        {
+            "title": "Python Programlama",
+            "description": "Python programlama dili ile ilgili kurs",
+            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "slug": "python-programlama",
+            "date": date.today(),
+            "isActive": True,
+            "isUpdated": False
+        },
+        {
+            "title": "Django Web Geliştirme",
+            "description": "Django web geliştirme çerçevesi ile ilgili kurs",
+            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "slug": "django-web-gelistirme",
+            "date": date.today(),
+            "isActive": True,
+            "isUpdated": True
+        },
+        {
+            "title": "Veritabanı Yönetimi",
+            "description": "Veritabanı yönetimi ve SQL ile ilgili kurs",
+            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "slug": "veritabani-yonetimi",
+            "date": date.today(),
+            "isActive": False,
+            "isUpdated": False
+        },
+        {
+            "title": "Web Tasarımı",
+            "description": "Web tasarımı ve HTML/CSS ile ilgili kurs",
+            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "slug": "web-tasarimi",
+            "date": date.today(),
+            "isActive": True,
+            "isUpdated": False
+        }
+    ],
+    "categories": [{"id": 1, "name" : "programlama","slug": "programlama"}, 
+                   {"id": 2, "name" : "yazılım","slug": "yazilim"}, 
+                   {"id": 3, "name" : "veritabanı","slug": "veritabani"}, 
+                   {"id": 4, "name" : "web","slug": "web"}]
+}
+
+
+
 # http://127.0.0.1:8000/kurslar
 
 
 def index(request):
-    category_list = list(data.keys()) # Kategorilerin anahtarlarını listeye al
-
+    kurslar = db['courses'] #db'den kursları alıyoruz
+    kategoriler = db['categories'] #db'den kategorileri alıyoruz
     return render(request, 'courses/index.html'
-                  , {'categories': category_list})
+                  , {'categories': kategoriler, 'courses': kurslar}) #render ile index.html dosyasını render ediyoruz ve kategorileri ve kursları gönderiyoruz
 
 def details(request,kurs_adi):
     return HttpResponse(f'{kurs_adi} detay sayfası')

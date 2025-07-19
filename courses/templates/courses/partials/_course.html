@@ -1,0 +1,18 @@
+  <div class="card mb-3">
+                       <div class="row">
+                        <div class="col-4">
+                            <img class="img-fluid rounded-start" src="{{ kurs.imageUrl }}"  alt="{{ kurs.title }}">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ kurs.title }}</h5>
+                                <p class="card-text">{{ kurs.description }}</p>
+                                <p class="card-text"><small class="text-muted">{{ kurs.date }}</small></p>
+                                {% if kurs.isUpdated %} <!-- Eğer kurs güncellendiyse -->
+                                    <span class="badge bg-success">Güncellendi</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Pasif</span>
+                                {% endif %}
+                       </div>
+                        </div>
+                    </div>
