@@ -1,4 +1,10 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %}   <!-- layout.html dosyası en üstte kalacak yoksa hata veriyor.. -->
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+{% endblock %}
+
 {% block content %} <!--bu contentin içine yazılacak olanlar layout.html dosyasındaki contentin içine yazılacak-->
     <div class="container mt-3">
         <div class="row">
@@ -19,4 +25,8 @@
         </div>
     </div>
 {% endblock %}
+
+
 {% block title %}Kurslar{% endblock %}
+
+{% block js_files %}{% endblock %} <!-- JavaScript dosyaları için blok -->

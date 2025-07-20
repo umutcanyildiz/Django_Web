@@ -14,7 +14,7 @@ db = {
         {
             "title": "Python Programlama",
             "description": "Python programlama dili ile ilgili kurs",
-            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "imageUrl": "1.jpeg",
             "slug": "python-programlama",
             "date": datetime.now(),
             "isActive": True,
@@ -23,7 +23,7 @@ db = {
         {
             "title": "Django Web Geliştirme",
             "description": "Django web geliştirme çerçevesi ile ilgili kurs",
-            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "imageUrl": "2.png",
             "slug": "django-web-gelistirme",
             "date": date.today(),
             "isActive": True,
@@ -32,7 +32,7 @@ db = {
         {
             "title": "Veritabanı Yönetimi",
             "description": "Veritabanı yönetimi ve SQL ile ilgili kurs",
-            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "imageUrl": "3.jpg",
             "slug": "veritabani-yonetimi",
             "date": date.today(),
             "isActive": True,
@@ -41,7 +41,7 @@ db = {
         {
             "title": "Web Tasarımı",
             "description": "Web tasarımı ve HTML/CSS ile ilgili kurs",
-            "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
+            "imageUrl": "4.jpg",
             "slug": "web-tasarimi",
             "date": date.today(),
             "isActive": True,
