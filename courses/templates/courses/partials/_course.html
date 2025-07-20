@@ -5,9 +5,9 @@
                         </div>
                         <div class="col-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ kurs.title }}</h5>
-                                <p class="card-text">{{ kurs.description }}</p>
-                                <p class="card-text"><small class="text-muted">{{ kurs.date }}</small></p>
+                                <h5 class="card-title">{{ kurs.title |truncatechars:10 }}</h5> <!-- Başlık 10 karakterle sınırlı -->
+                                <p class="card-text">{{ kurs.description |truncatewords:20 }}</p> <!-- Açıklama 20 kelimeyle -->
+                                <p class="card-text"><small class="text-muted">{{ kurs.date |date:"SHORT_DATE_FORMAT" }}</small></p>
                                 {% if kurs.isUpdated %} <!-- Eğer kurs güncellendiyse -->
                                     <span class="badge bg-success">Güncellendi</span>
                                 {% else %}
@@ -16,3 +16,9 @@
                        </div>
                         </div>
                     </div>
+
+
+<!-- d  sadece günü 
+ Y m d yıl ay gün şeklinde 
+ d F D gün(sayı) ay(isim) gün(isim) -->
+

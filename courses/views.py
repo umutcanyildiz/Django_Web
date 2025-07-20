@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
-from datetime import date
+from datetime import date, datetime
 data = {
     "progralamlama": "programlama kategorisindeki kurslar",
     "yazilim": "yazılım kategorisindeki kurslar",
@@ -16,7 +16,7 @@ db = {
             "description": "Python programlama dili ile ilgili kurs",
             "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
             "slug": "python-programlama",
-            "date": date.today(),
+            "date": datetime.now(),
             "isActive": True,
             "isUpdated": False
         },
@@ -35,7 +35,7 @@ db = {
             "imageUrl": "https://beecrowd.com/wp-content/uploads/2024/04/2022-07-19-Melhores-cursos-de-Python.jpg",
             "slug": "veritabani-yonetimi",
             "date": date.today(),
-            "isActive": False,
+            "isActive": True,
             "isUpdated": False
         },
         {
