@@ -8,6 +8,9 @@ class Course(models.Model):
     date = models.DateField()
     isActive = models.BooleanField(default=True)
 
+    def __str__(self): #burda 
+        return f"{self.title} - {self.date} - {self.isActive}"
+
 #You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 #Run 'python manage.py migrate' to apply them -> bu kodu çalıştırdığımızda veritabanında tablolar oluşturulacak.
 
@@ -26,3 +29,10 @@ class Course(models.Model):
 # course = Course(title="Django Kursu", description="Django ile web geliştirme kursu", imageUrl="https://example.com/image.jpg", date="2023-10-01", isActive=True)
 # course.save()  # Bu, veritabanına kaydı ekler. ya da
 # Course.objects.create(title="Django Kursu", description="Django ile web geliştirme kursu", imageUrl="https://example.com/image.jpg", date="2023-10-01", isActive=True) yazarsak .save() metodunu çağırmadan da kayıt ekleyebiliriz.
+
+
+#Kayıt sorgulama için:
+# from courses.models import Course
+# courses = Course.objects.all()  # Tüm kayıtları getirir
+# course = Course.objects.get(pk=1)  # ID'si 1 olan kaydı getirir
+# print(course.title, course.description, course.date)
