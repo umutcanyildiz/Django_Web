@@ -36,3 +36,20 @@ class Course(models.Model):
 # courses = Course.objects.all()  # Tüm kayıtları getirir
 # course = Course.objects.get(pk=1)  # ID'si 1 olan kaydı getirir
 # print(course.title, course.description, course.date)
+
+
+#Kayıt Filtreleme için:
+# from courses.models import Course
+#exclude ise belirtilen koşula uymayan kayıtları getirir.
+# courses = Course.objects.filter(isActive=True)  # Sadece aktif kursları getirir
+# course = Course.objects.filter(title__icontains="Django")  # Başlığı "Django" içeren kursları getirir
+#filter bize liste olarak sonuç döndürür, get ise tek bir kayıt döndürür.
+#yani elemana ulaşmak için [0] yazabiliriz.
+#Course.objects.filter(date__lte="2023-10-01")  # Tarihi 2023-10-01 veya daha önce olan kursları getirir
+#Course.objects.filter(title_contains="Django")  # Başlığı "Django" içeren kursları getirir
+#logical operatörler de kullanılabilir:
+# Course.objects.filter(isActive=True, date__gte="2023-01-01")  # Aktif ve 2023'ten sonra olan kursları getirir
+#or da kullanılabilir:
+# from django.db.models import Q
+# courses = Course.objects.filter(Q(isActive=True) | Q(date__gte="2023-01-01"))  # Aktif veya 2023'ten sonra olan kursları getirir
+#courses = Course.objects.filter(Q(title__contains="kurs") | Q(date__gte="2023-01-01"), isActive=1) #  # Başlığı "kurs" içeren veya 2023'ten sonra olan ve aktif olan kursları getirir
