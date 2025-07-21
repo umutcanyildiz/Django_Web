@@ -2,12 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 from datetime import date, datetime
-data = {
-    "progralamlama": "programlama kategorisindeki kurslar",
-    "yazilim": "yazılım kategorisindeki kurslar",
-    "veritabani": "veritabanı kategorisindeki kurslar",
-    "web": "web kategorisindeki kurslar"
-}
+from .models import Course,Category #artık veri tabanındaki verileri kullanarak kurs listeleme sayfasını oluşturacağız.
+
 
 db = {
     "courses" : [
@@ -60,8 +56,8 @@ db = {
 
 
 def index(request):
-    kurslar = db['courses'] #db'den kursları alıyoruz
-    kategoriler = db['categories'] #db'den kategorileri alıyoruz
+    kurslar = Course.objects.all() #Course modelinden tüm kursları alıyoruz
+    kategoriler = Category.objects.all() #Category modelinden tüm kategorileri alıyoruz
     return render(request, 'courses/index.html'
                   , {'categories': kategoriler, 'courses': kurslar}) #render ile index.html dosyasını render ediyoruz ve kategorileri ve kursları gönderiyoruz
 

@@ -10,6 +10,12 @@ class Course(models.Model):
 
     def __str__(self): #burda 
         return f"{self.title} - {self.date} - {self.isActive}"
+    
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True) #slug alanı benzersiz olmalı
+
+
 
 #You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 #Run 'python manage.py migrate' to apply them -> bu kodu çalıştırdığımızda veritabanında tablolar oluşturulacak.

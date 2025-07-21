@@ -16,9 +16,9 @@
             <div class="col-9">
                 <!--content-->
                 {% for kurs in courses %} <!--courses listesini döngüye alıyoruz-->
-                    {% if kurs.isActive %} <!-- Eğer kurs aktifse -->
+                    {% comment %} {% if kurs.isActive %} <!-- Eğer kurs aktifse --> {% endcomment %}
                       {% include "courses/partials/_course.html" %} <!--course partialini include ediyoruz-->
-                    {% endif %}
+                    {% comment %} {% endif %} {% endcomment %}
                 {% endfor %}
 
             </div>
