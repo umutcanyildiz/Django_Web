@@ -6,7 +6,11 @@
                         </div>
                         <div class="col-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ kurs.title}}</h5> <!--  |truncatechars:10 Başlık 10 karakterle sınırlı -->
+                                <h5 class="card-title">
+                                    <a href="{% url 'course_details' kurs.id %}">
+                                        {{ kurs.title }}
+                                    </a>
+                                </h5> <!--  |truncatechars:10 Başlık 10 karakterle sınırlı -->
                                 <p class="card-text">{{ kurs.description}}</p> <!--  |truncatewords:20 Açıklama 20 kelimeyle -->
                                 <p class="card-text"><small class="text-muted">{{ kurs.date |date:"SHORT_DATE_FORMAT" }}</small></p>
                        </div>

@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
 from django.urls import reverse
 from datetime import date, datetime
 from .models import Course,Category #artık veri tabanındaki verileri kullanarak kurs listeleme sayfasını oluşturacağız.
@@ -61,8 +61,18 @@ def index(request):
     return render(request, 'courses/index.html'
                   , {'categories': kategoriler, 'courses': kurslar}) #render ile index.html dosyasını render ediyoruz ve kategorileri ve kursları gönderiyoruz
 
-def details(request,kurs_adi):
-    return HttpResponse(f'{kurs_adi} detay sayfası')
+def details(request,kurs_id):
+    # try:
+    #     course= Course.objects.get(pk=kurs_id) #id'si kurs_id olan kursu alıyoruz
+    # except:
+    #     raise Http404()
+
+    course = get_object_or_404(Course, pk=kurs_id) #get_object_or_404 ile id'si kurs_id olan kursu alıyoruz, eğer yoksa 404 hatası veriyoruz
+    
+    context= {
+        'course': course
+    }
+    return render(request,"courses/details.html", context)
 
 def getCoursesByCategory(request, category_name): #dinamik url parametresi
     # category parametresi URL'den alınır ve kullanılır
