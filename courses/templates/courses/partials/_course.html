@@ -1,13 +1,13 @@
 {% load static %} <!-- Static dosyaları yüklemek için gerekli kütüphane -->
   <div class="card mb-3">
                        <div class="row">
-                        <div class="col-4">
+                        <div class="col-5">
                             <img class="img-fluid rounded-start" src="{% static "courses/img/"|add:kurs.imageUrl %}"  alt="{{ kurs.title }}"> <!-- add yazdıktan sonra arada boşluk olmayacak yoksa hata veriyor.. -->
                         </div>
-                        <div class="col-8">
+                        <div class="col-7">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="{% url 'course_details' kurs.id %}">
+                                    <a href="{% url 'course_details' kurs.slug %}">
                                         {{ kurs.title }}
                                     </a>
                                 </h5> <!--  |truncatechars:10 Başlık 10 karakterle sınırlı -->

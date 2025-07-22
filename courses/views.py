@@ -61,14 +61,9 @@ def index(request):
     return render(request, 'courses/index.html'
                   , {'categories': kategoriler, 'courses': kurslar}) #render ile index.html dosyasını render ediyoruz ve kategorileri ve kursları gönderiyoruz
 
-def details(request,kurs_id):
-    # try:
-    #     course= Course.objects.get(pk=kurs_id) #id'si kurs_id olan kursu alıyoruz
-    # except:
-    #     raise Http404()
+def details(request,slug):
+    course = get_object_or_404(Course, slug=slug) #get_object_or_404 ile slug'ı kurs_id olan kursu alıyoruz, eğer yoksa 404 hatası veriyoruz ( slug=slug burdaki ilk slug modeldeki slug)
 
-    course = get_object_or_404(Course, pk=kurs_id) #get_object_or_404 ile id'si kurs_id olan kursu alıyoruz, eğer yoksa 404 hatası veriyoruz
-    
     context= {
         'course': course
     }

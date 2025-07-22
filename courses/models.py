@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 class Course(models.Model):
@@ -7,6 +8,13 @@ class Course(models.Model):
     imageUrl = models.CharField(max_length=200)
     date = models.DateField()
     isActive = models.BooleanField(default=True)
+    slug = models.SlugField(default="",null=False,unique=True,db_index=True) #bunun yerine migrations klasörünü silip tekrar makemigrations ve migrate komutlarını çalıştırabiliriz.
+    #slug alanı benzersiz olmalı ve boş olmamalı, ayrıca veritabanında indekslenmeli
+    #db_index=True, bu alanın veritabanında indekslenmesini sağlar, bu da sorgu performansını artırır.
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)  # Başlık küçük harfe çevrilir ve boşluklar tireye dönüştürülür
+        super().save(*args, **kwargs)
 
     def __str__(self): #burda 
         return f"{self.title} - {self.date} - {self.isActive}"
@@ -59,3 +67,11 @@ class Category(models.Model):
 # from django.db.models import Q
 # courses = Course.objects.filter(Q(isActive=True) | Q(date__gte="2023-01-01"))  # Aktif veya 2023'ten sonra olan kursları getirir
 #courses = Course.objects.filter(Q(title__contains="kurs") | Q(date__gte="2023-01-01"), isActive=1) #  # Başlığı "kurs" içeren veya 2023'ten sonra olan ve aktif olan kursları getirir
+
+
+##SLUG-FIELD
+#SlugField, genellikle URL'lerde kullanılmak üzere metin alanlarını benzersiz ve okunabilir hale getirmek için kullanılır.
+#SlugField, genellikle başlık gibi metin alanlarını URL dostu hale getirmek için kullanılır. Örneğin, "Django Kursu" başlığı "django-kursu" şeklinde bir slug'a dönüştürülebilir.
+#shelde kullanarak slug alanını doldurabiliriz:
+# from courses.models import Course
+#Course.objects.get(pk=1).save()  
