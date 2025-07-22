@@ -92,3 +92,8 @@ class Category(models.Model):
 # course.delete()  # Kaydı sil
 #ya da 
 # Course.objects.filter(isActive=False).delete()  # Pasif olan tüm kursları siler
+
+#Admin paneli için kullancı ekleme
+#python manage.py createsuperuser
+#Bu komut çalıştırıldığında kullanıcı adı, e-posta ve şifre istenir
+
