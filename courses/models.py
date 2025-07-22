@@ -9,6 +9,8 @@ class Course(models.Model):
     date = models.DateField()
     isActive = models.BooleanField(default=True)
     slug = models.SlugField(default="",null=False,unique=True,db_index=True) #bunun yerine migrations klasörünü silip tekrar makemigrations ve migrate komutlarını çalıştırabiliriz.
+    #editable= False , #bu alanın admin panelinde düzenlenmesini engeller
+    #blank=False, #bu alanın formda boş bırakılmasını engeller
     #slug alanı benzersiz olmalı ve boş olmamalı, ayrıca veritabanında indekslenmeli
     #db_index=True, bu alanın veritabanında indekslenmesini sağlar, bu da sorgu performansını artırır.
 
@@ -17,13 +19,14 @@ class Course(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self): #burda 
-        return f"{self.title} - {self.date} - {self.isActive}"
+        return f"{self.title}"
     
 class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True) #slug alanı benzersiz olmalı
 
-
+    def __str__(self): #burda 
+        return f"{self.name}"
 
 #You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 #Run 'python manage.py migrate' to apply them -> bu kodu çalıştırdığımızda veritabanında tablolar oluşturulacak.
