@@ -75,3 +75,12 @@ class Category(models.Model):
 #shelde kullanarak slug alanını doldurabiliriz:
 # from courses.models import Course
 #Course.objects.get(pk=1).save()  
+
+
+#Kayıt güncelleme
+# from courses.models import Course
+# course = Course.objects.get(pk=1)  # ID'si 1 olan kaydı al
+# course.title = "Yeni Başlık"  # Başlığı güncelle
+# course.save()  # Değişiklikleri kaydet
+#veya çoklu güncelleme yapmak için
+# Course.objects.filter(isActive=True).update(isActive=False)  # Aktif olan tüm kursları pasif yapar
