@@ -84,3 +84,11 @@ class Category(models.Model):
 # course.save()  # Değişiklikleri kaydet
 #veya çoklu güncelleme yapmak için
 # Course.objects.filter(isActive=True).update(isActive=False)  # Aktif olan tüm kursları pasif yapar
+
+
+#Kayıt Silme
+# from courses.models import Course
+# course = Course.objects.get(pk=1)  # ID'si 1 olan kaydı al
+# course.delete()  # Kaydı sil
+#ya da 
+# Course.objects.filter(isActive=False).delete()  # Pasif olan tüm kursları siler
