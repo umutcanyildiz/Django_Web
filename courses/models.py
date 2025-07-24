@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True, default="",blank=True,db_index=True) #slug alanı benzersiz olmalı
+    slug = models.SlugField(max_length=50, unique=True, default="",blank=True,db_index=True, null=False) #slug alanı benzersiz olmalı
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)  # Başlık küçük harfe çevrilir ve boşluklar tireye dönüştürülür
@@ -31,7 +31,7 @@ class Course(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)  # Başlık küçük harfe çevrilir ve boşluklar tireye dönüştürülür
         super().save(*args, **kwargs)
-
+    #bunun yerine admin.py dosyasında prepopulated_fields kullanarak slug alanını otomatik doldurabiliriz.
     def __str__(self): #burda 
         return f"{self.title}"
     

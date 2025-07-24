@@ -8,8 +8,7 @@ from . import views #aynı dizindeki views modülünü içe aktarıyoruz
 urlpatterns = [
     path('', views.index), #hiç bişy yazılmazsa anasayfa olarak kabul edilir
     path('<slug:slug>',views.details,name="course_details"), #kurs_id dinamik olarak değişir, bu sayede her kurs için ayrı bir detay sayfası oluşturulur
-    path('kategori/<int:category_id>',views.getCoursesByCategoryId),
-    path('kategori/<str:category_name>',views.getCoursesByCategory,name="courses_by_category"), #kategori/ adı sabit olarak gelir ve str bir veri geldiğinde bu path ile eşleşir
+    path('kategori/<slug:slug>',views.getCoursesByCategory,name="courses_by_category"), #kategori/ adı sabit olarak gelir ve str bir veri geldiğinde bu path ile eşleşir
     
     
     #kategori/ adı sabit olarak gelir ve int bir veri geldiğinde üstteki #path ile eşleşir, str bir veri geldiğinde ise alttaki path ile eşleşir

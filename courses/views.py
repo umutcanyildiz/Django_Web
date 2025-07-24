@@ -69,23 +69,11 @@ def details(request,slug):
     }
     return render(request,"courses/details.html", context)
 
-def getCoursesByCategory(request, category_name): #dinamik url parametresi
-    # category parametresi URL'den alınır ve kullanılır
-    try:
-        category_text = data[category_name]
-        return render(request, 'courses/kurslar.html', {
-            'category_name': category_name,
-            'category_text': category_text 
-            })
-    except :
-        return HttpResponseNotFound('Kategori bulunamadı')
-    
-def getCoursesByCategoryId(request, category_id): #dinamik
-    try:
-        categoriy_list = list(data.keys()) #kategorilerin anahtarlarını listeye al (programlama, yazılım, veritabanı, web)
-        category = categoriy_list[category_id-1] #category_id 1'den başladığı için -1 yapıyoruz
-        #category_id 1 ise programlama, 2 ise yazılım, 3 ise veritabanı, 4 ise web kategorisine yönlendir
-        redirect_url = reverse('courses_by_category', args=[category]) #reverse ile url'yi alıyoruz
-        return redirect(redirect_url) #redirect ile yönlendiriyoruz
-    except :
-        return HttpResponseNotFound('Kategori bulunamadı')
+def getCoursesByCategory(request, slug): #dinamik url parametresi
+    kurslar = Course.objects.filter(category__slug=slug, isActive=True) #Category modelindeki slug ile eşleşen kursları alıyoruz
+    kategoriler = Category.objects.all() #Tüm kategorileri alıyoruz
+    return render(request, 'courses/index.html', { 
+        'categories': kategoriler, 
+        'courses': kurslar, 
+        "secili_kategori": slug #seçili kategoriyi de gönderiyoruz, böylece hangi kategorinin seçili olduğunu bileceğiz
+    }) 
