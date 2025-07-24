@@ -4,8 +4,11 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True) #slug alanı benzersiz olmalı
+    slug = models.SlugField(max_length=50, unique=True, default="",blank=True,db_index=True) #slug alanı benzersiz olmalı
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)  # Başlık küçük harfe çevrilir ve boşluklar tireye dönüştürülür
+        super().save(*args, **kwargs)
 
     def __str__(self): #burda 
         return f"{self.name}"
@@ -18,7 +21,8 @@ class Course(models.Model):
     date = models.DateField()
     isActive = models.BooleanField(default=True)
     slug = models.SlugField(default="",null=False,unique=True,db_index=True) #bunun yerine migrations klasörünü silip tekrar makemigrations ve migrate komutlarını çalıştırabiliriz.
-    category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE,related_name="kurslar")
+    #related_name="kurslar" ile Category modelinden Course modeline erişim sağlanabilir. Örneğin, bir kategoriye ait kursları almak için category.kurslar.all() kullanılabilir.
     #editable= False , #bu alanın admin panelinde düzenlenmesini engeller
     #blank=False, #bu alanın formda boş bırakılmasını engeller
     #slug alanı benzersiz olmalı ve boş olmamalı, ayrıca veritabanında indekslenmeli
@@ -111,3 +115,9 @@ class Course(models.Model):
 # from courses.models import Category, Course
 #kurs5 = Course(title="Python Kursu", description="Python ile programlama kursu", imageUrl="https://example.com/python.jpg", date="2023-10-01", isActive=True, category_id=1)
 #kurs5.save()  # Bu, veritabanına kaydı ekler.
+
+#ilişkili kayıtları sorgulamak için:
+# from courses.models import Category
+# category = Category.objects.get(pk=1)  # ID'si 1 olan kategoriyi al
+# courses_in_category = category.kurslar.all()  # Bu kategoriye ait tüm kursları alır
+# kurslar = Course.objects.filter(category__id="1")
