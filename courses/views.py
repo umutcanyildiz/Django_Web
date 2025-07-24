@@ -70,7 +70,7 @@ def details(request,slug):
     return render(request,"courses/details.html", context)
 
 def getCoursesByCategory(request, slug): #dinamik url parametresi
-    kurslar = Course.objects.filter(category__slug=slug, isActive=True) #Category modelindeki slug ile eşleşen kursları alıyoruz
+    kurslar = Course.objects.filter(categories__slug=slug, isActive=True) #Category modelindeki slug ile eşleşen kursları alıyoruz
     kategoriler = Category.objects.all() #Tüm kategorileri alıyoruz
     return render(request, 'courses/index.html', { 
         'categories': kategoriler, 

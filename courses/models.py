@@ -13,7 +13,6 @@ class Category(models.Model):
     def __str__(self): #burda 
         return f"{self.name}"
 
-# Create your models here.
 class Course(models.Model):
     title = models.CharField(max_length=50) #null = true demek boş bırakılabilir
     description = models.TextField()
@@ -21,7 +20,9 @@ class Course(models.Model):
     date = models.DateField()
     isActive = models.BooleanField(default=True)
     slug = models.SlugField(default="",null=False,unique=True,db_index=True) #bunun yerine migrations klasörünü silip tekrar makemigrations ve migrate komutlarını çalıştırabiliriz.
-    category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE,related_name="kurslar")
+    # category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE,related_name="kurslar")
+    categories = models.ManyToManyField(Category) #ManyToManyField ile bir kurs birden fazla kategoriye ait olabilir, ayrıca bir kategori de birden fazla kursa ait olabilir.
+
     #related_name="kurslar" ile Category modelinden Course modeline erişim sağlanabilir. Örneğin, bir kategoriye ait kursları almak için category.kurslar.all() kullanılabilir.
     #editable= False , #bu alanın admin panelinde düzenlenmesini engeller
     #blank=False, #bu alanın formda boş bırakılmasını engeller
@@ -34,7 +35,8 @@ class Course(models.Model):
     #bunun yerine admin.py dosyasında prepopulated_fields kullanarak slug alanını otomatik doldurabiliriz.
     def __str__(self): #burda 
         return f"{self.title}"
-    
+
+
 
 
 #You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
@@ -121,3 +123,14 @@ class Course(models.Model):
 # category = Category.objects.get(pk=1)  # ID'si 1 olan kategoriyi al
 # courses_in_category = category.kurslar.all()  # Bu kategoriye ait tüm kursları alır
 # kurslar = Course.objects.filter(category__id="1")
+
+
+#Çoktan çok ilişkide kayıt ekleme:
+# from courses.models import Category, Course
+# category = Category.objects.get(pk=1)  # ID'si 1 olan kategoriyi al
+# course = Course.objects.get(pk=1)  # ID'si 1 olan kursu al
+# course.categories.add(category)  # Kursa kategori ekle
+#Çoktan çok ilişkide kayıtları sorgulamak için:
+# from courses.models import Course,Category
+#programlama = Category.objects.get(pk=1)
+#programlama.course_set.filter(isActive=True)  # Programlama kategorisine ait aktif kursları alır
