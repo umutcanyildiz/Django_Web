@@ -1,6 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True) #slug alanı benzersiz olmalı
+
+
+    def __str__(self): #burda 
+        return f"{self.name}"
+
 # Create your models here.
 class Course(models.Model):
     title = models.CharField(max_length=50) #null = true demek boş bırakılabilir
@@ -9,6 +18,7 @@ class Course(models.Model):
     date = models.DateField()
     isActive = models.BooleanField(default=True)
     slug = models.SlugField(default="",null=False,unique=True,db_index=True) #bunun yerine migrations klasörünü silip tekrar makemigrations ve migrate komutlarını çalıştırabiliriz.
+    category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE)
     #editable= False , #bu alanın admin panelinde düzenlenmesini engeller
     #blank=False, #bu alanın formda boş bırakılmasını engeller
     #slug alanı benzersiz olmalı ve boş olmamalı, ayrıca veritabanında indekslenmeli
@@ -21,12 +31,7 @@ class Course(models.Model):
     def __str__(self): #burda 
         return f"{self.title}"
     
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True) #slug alanı benzersiz olmalı
 
-    def __str__(self): #burda 
-        return f"{self.name}"
 
 #You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 #Run 'python manage.py migrate' to apply them -> bu kodu çalıştırdığımızda veritabanında tablolar oluşturulacak.
@@ -100,3 +105,9 @@ class Category(models.Model):
 #python manage.py createsuperuser
 #Bu komut çalıştırıldığında kullanıcı adı, e-posta ve şifre istenir
 
+#iliskili modeller
+#Bir modelin başka bir modelle ilişkili olduğu durumlarda ForeignKey
+#shell de kayıt eklemek için:
+# from courses.models import Category, Course
+#kurs5 = Course(title="Python Kursu", description="Python ile programlama kursu", imageUrl="https://example.com/python.jpg", date="2023-10-01", isActive=True, category_id=1)
+#kurs5.save()  # Bu, veritabanına kaydı ekler.
